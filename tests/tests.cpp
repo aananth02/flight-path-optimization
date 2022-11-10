@@ -3,6 +3,6 @@
 using namespace std;
 
 int main() {
-    cout << "Testing file compiles" << endl;
+    cout << "Dummy Test" << endl;
     return 0;
 }

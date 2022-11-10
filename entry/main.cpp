@@ -3,6 +3,6 @@
 using namespace std;
 
 int main() {
-    cout << "entry folder main file reached and compiled" << endl;
+    cout << "MAIN FILE REACHED" << endl;
     return 0;
 }
