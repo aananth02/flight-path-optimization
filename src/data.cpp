@@ -64,6 +64,41 @@ airport Airport_data::conv_line(line& st) {
     return tmp;
 }
 
+float Airport_data::getLatitude(int id) {
+    for (auto i : airport_data) {
+        if (i.id == id) return i.Latitude;
+    }
+    return -1;
+}
+float Airport_data::getLatitude(string Name) {
+    for (auto i : airport_data) {
+        if (i.Name == Name) return i.Latitude;
+    }
+    return -1;
+}
+float Airport_data::getLongitude(int id) {
+    for (auto i : airport_data) {
+        if (i.id == id) return i.Longitude;
+    }
+    return -1;
+}
+float Airport_data::getLongitude(string Name) {
+    for (auto i : airport_data) {
+        if (i.Name == Name) return i.Longitude;
+    }
+    return -1;
+}
+
+string Airport_data::getName(int id) {
+    for (auto i : airport_data) {
+        if (i.id == id) return i.Name;
+    }
+    return "";
+}
+
+
+// AIRLINE
+
 Airline_data::Airline_data(string filename) {
     ifstream wordsFile(filename);
     if (wordsFile.is_open()) {

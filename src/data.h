@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -29,6 +30,12 @@ class Airport_data {
     public:
         Airport_data(string filename);
         vector<airport> getdata() {return airport_data;};
+
+        float getLatitude(int id);
+        float getLatitude(string Name);
+        float getLongitude(int id);
+        float getLongitude(string Name);
+        string getName(int id);
     private:
         struct line {
             string id;
