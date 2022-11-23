@@ -8,7 +8,7 @@ Graph::Graph(bool weighted, bool directed) : weighted(weighted),directed(directe
     ;
 }
 
-Graph::Graph(Airport_data ad, Route_data rd) {
+Graph::Graph(Airport_data& ad, Route_data& rd) {
     weighted = true;
     directed = true;
     vector<route> routes = rd.getdata();
@@ -24,7 +24,7 @@ Graph::Graph(Airport_data ad, Route_data rd) {
     }
 }
 
-vector<Vertex> Graph::getAdjacentDir(Vertex v, int dir) const {      // dir = 1 is when source, ele dir = -1 when dest, 0 when don't care
+vector<Vertex> Graph::getAdjacentDir(Vertex v, int dir) const {
     int idx = getVertexIdx(v);
     vector<Vertex> to_ret;
     if (idx == -1) return to_ret;

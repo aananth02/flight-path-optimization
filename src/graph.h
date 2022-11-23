@@ -17,7 +17,9 @@ public:
     Graph(bool weighted, bool directed);
     Graph(Airport_data ad, Route_data rd);
 
-    vector<Vertex> getAdjacentDir(Vertex source, int dir) const;
+    // dir = 1 is when v acts as source, dir = -1 when v acts as destination, dir = 0 when we only care about adjacency
+    vector<Vertex> getAdjacentDir(Vertex v, int dir) const;      
+    
     vector<Vertex> getVertices() const;
     Edge getEdge(Vertex source, Vertex destination) const;
     vector<Edge> getEdges() const;
@@ -35,12 +37,16 @@ public:
     Edge removeEdge(Vertex source, Vertex destination);
     bool isDirected() const;
     void clear();
-    int getVertexIdx(Vertex x) const;
 
 private:
     vector<vector<pair<float, string>>> adjacency_matrix;
     vector<pair<float, string>> empty_edges;
     vector<Vertex> ver_index;
     bool weighted;
-    bool directed;      // if directed, then matrix[src][dest] > 0; matrix[dest][src] < 0; 0 for no edge
+
+    // if the graph is directed, then the weight of an edge is determined by the order of row and column for source and destination
+    // adjacency_matrix[src][dest] > 0; adjacency_matrix[dest][src] < 0; 0 for no edge
+    bool directed;      
+
+    int getVertexIdx(Vertex x) const;
 };
