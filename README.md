@@ -7,6 +7,12 @@
 
 # Project Description
 
+As travel resumes in a world that is moving out of a pandemic, people are ever more conscious of the time they spend on all non-productive activities. Commute is one such activity. In order to allow people to focus on that which is most important w.r.t their purpose of travel, we aim to build a general search tool that allows people to easily minimize time spent on getting to and from their destinations. Using the dataset for OpenFlights, we will use a Shortest Path Algorithm for finding the shortest distances between two airports. Additionally, as a discovery tool, we will also allow users to find the most popular transit hubs servicing their end destinations.
+
+View the demo as shown below to view our solution to the above question.
+
+*Note: You can read more about the project in the project proposal file*
+
 <br>
 <br>
 
@@ -78,4 +84,42 @@ $ ./main
 <br>
 
 
-## <strong>Notes and Disclaimers:
+## <strong>Notes and Disclaimers</strong>:
+
+### <strong>DataSet Cleaning</strong>:
+
+*See the jupyter notebook file: for more details*
+
+**Why we need to reduce data**
+
+* The function is implemented in a manner that we do not need to do this, however, it is taking to long to run since we have 60K + routes
+
+* Thus, we decided to create a cleaned data, which is easier to run
+
+**How we cleaned it i.e. reduced the size**
+
+* We did not want to make it a random process i.e. use a sample function
+
+* Rather we decided to remove NA values
+
+**Why this is not ideal**
+
+* The data that we are removing does not make a great difference since CodeShare does not affect our code, however, it is good that we are removing other NA values
+
+* This results in a smaller graph that is not representative of the data
+
+**What can be done**
+
+* For testing purposes so that the code runs faster we can use this cleaned dataset
+
+* For real-world implementation we need to ensure that we use the enstire dataset as we have accounted for all edge cases anyways. While this would take time to run, it is the more correct and ideal implementation
+
+**Note: To check with all routes data just change the path for routes data in main file, DISCLAIMER: will take a long time to run**
+
+### <strong>Data Itself</strong>
+
+* All the data used is from 2014, which is not upto date
+* Data is not clean and has a lot of NULL / missing values
+
+
+#
