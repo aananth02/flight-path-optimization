@@ -23,8 +23,16 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
         if (!insertEdge(src, dst, dist, routes[i].airline_code)) {
             if (adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first < 0) {
                 adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first *= -1;
+                if (adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second != routes[i].airline_code) {
+                    adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second += " + " + routes[i].airline_code;
+                    adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].second += " + " + routes[i].airline_code;
+                }
             } else {
                 adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].first *= -1;
+                if (adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second != routes[i].airline_code) {
+                    adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second += " + " + routes[i].airline_code;
+                    adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].second += " + " + routes[i].airline_code;
+                }
             }
         }
     }
@@ -37,7 +45,7 @@ vector<Vertex> Graph::getAdjacentDir(Vertex v, int dir) const {
     for (size_t i = 0; i < ver_index.size(); i++) {
         if (dir == 1 && adjacency_matrix[idx][i].first > 0) {
             to_ret.push_back(ver_index[i]);
-        } else if (dir == -1 && adjacency_matrix[idx][i].first < 0) {
+        } else if (dir == -1 && (adjacency_matrix[idx][i].first < 0 || (adjacency_matrix[i][idx].first > 0 && adjacency_matrix[idx][i].first > 0))) {
             to_ret.push_back(ver_index[i]);
         } else if (dir == 0 && adjacency_matrix[idx][i].first != 0) {
             to_ret.push_back(ver_index[i]);

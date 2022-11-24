@@ -5,17 +5,11 @@
 
 using namespace std;
 #include "../src/graph.h"
+
 // There are subset data files created for small test : routes_subset
 
 Airport_data test_airport1("../data/airports.dat");
-vector<airport> tmpairport1 = test_airport1.getdata();
-
-// Airline_data test_data1("../data/airlines.dat");
-// vector<airline> tmpdata1 = test_data.getdata();
-
 Route_data test_routes1("../data/routes_subset.dat");
-vector<route> tmproutes1 = test_routes1.getdata();
-
 Graph test_graph(test_airport1, test_routes1);
 
 TEST_CASE("Graph Creation Small", "[graph]") {
@@ -48,4 +42,42 @@ TEST_CASE("Edge Weights and Labels Small", "[graph]") {
 }
 
 // Cleaned Dataset for overall graph testing : routes_cleaned.csv
-// More elaborate tests
+// Tests on Larger Dataset
+// Note: These tests take a long time to compile and run
+
+Route_data test_routes2("../data/routes_cleaned.csv");
+Graph test_graph_large(test_airport1, test_routes2);
+
+TEST_CASE("Graph Creation Large", "[graph]") {
+    REQUIRE(test_graph_large.getVertices().size() == 1631);
+    REQUIRE(test_graph_large.getEdges().size() == 10806);
+    REQUIRE(test_graph_large.isDirected());
+}
+
+TEST_CASE("Node Adjacency Large", "[graph]") {
+    vector<string> Rankin_Adj_source{"Baker Lake Airport", "Chesterfield Inlet Airport", "Churchill Airport", 
+                                     "Repulse Bay Airport", "Coral Harbour Airport", "Yellowknife Airport"};
+    vector<Vertex> adj = test_graph_large.getAdjacentDir("Rankin Inlet Airport", 1);
+    for (size_t i = 0; i < adj.size(); i++) {
+        REQUIRE(adj[i] == Rankin_Adj_source[i]);
+    }
+}
+
+TEST_CASE("Edge Weights and Labels Large", "[graph]") {
+
+    vector<float> weights = {distance(68.78170013427734, 32.75080108642578, 69.68329620361328, 18.918899536132812), 
+                            distance(-43.48939895629883, 172.53199768066406, -41.298301696777344, 173.2209930419922)};
+    vector<string> labels = {"5N", "NZ"};
+
+    Edge MMK_TOS = test_graph_large.getEdge("Murmansk Airport", "Tromsø Airport,");
+    Edge CHC_NSN = test_graph_large.getEdge("Christchurch International Airport", "Nelson Airport");
+    Edge NO_EXIST = test_graph_large.getEdge("Busselton Regional Airport", "Christchurch International Airport");
+
+    REQUIRE(MMK_TOS.weight == weights[0]);
+    REQUIRE(CHC_NSN.weight == weights[1]);
+    REQUIRE(int(NO_EXIST.weight) == 0);
+
+    REQUIRE(MMK_TOS.edge_label == labels[0]);
+    REQUIRE(CHC_NSN.edge_label == labels[1]);
+    REQUIRE(NO_EXIST.edge_label == "");
+}

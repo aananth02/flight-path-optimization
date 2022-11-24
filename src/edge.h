@@ -15,18 +15,18 @@ class Edge
     float weight;
 
     Edge(Vertex src, Vertex dest)
-        : src(src), dest(dest), edge_label(""), weight(-1) {;}
+        : src(src), dest(dest), edge_label(""), weight(0) {;}
 
 
     Edge(Vertex src, Vertex dest, string label)
-        : src(src), dest(dest), edge_label(label), weight(-1) {;}
+        : src(src), dest(dest), edge_label(label), weight(0) {;}
 
 
     Edge(Vertex src, Vertex dest, float w, string label)
         : src(src), dest(dest), edge_label(label), weight(w) {;}
 
 
-    Edge() : src(""), dest(""), edge_label(""), weight(-1) {;}
+    Edge() : src(""), dest(""), edge_label(""), weight(0) {;}
 
 
     bool operator<(const Edge& other) const { return weight < other.weight; };
