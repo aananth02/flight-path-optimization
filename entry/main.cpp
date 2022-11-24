@@ -13,7 +13,7 @@ int main() {
     vector<route> tmp2data = test2.getdata();
     Graph gph(test, test2);
     
-    vector<Vertex> t = gph.getAdjacentDir("Goroka Airport", 1);
+    vector<Vertex> t = gph.getAdjacentDir("Rankin Inlet Airport", 1);
     for (size_t i = 0; i < t.size(); i++) cout << t[i] << endl;
 
 

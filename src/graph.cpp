@@ -21,7 +21,11 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
         float dist = distance(ad.getLatitude(routes[i].source_id), ad.getLongitude(routes[i].source_id),
                               ad.getLatitude(routes[i].dest_id), ad.getLongitude(routes[i].dest_id));
         if (!insertEdge(src, dst, dist, routes[i].airline_code)) {
-            adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first *= -1;
+            if (adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first < 0) {
+                adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first *= -1;
+            } else {
+                adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].first *= -1;
+            }
         }
     }
 }
