@@ -12,7 +12,7 @@ class Edge
     Vertex src;
     Vertex dest;
     string edge_label;
-    int weight;
+    float weight;
 
     Edge(Vertex src, Vertex dest)
         : src(src), dest(dest), edge_label(""), weight(-1) {;}
@@ -22,7 +22,7 @@ class Edge
         : src(src), dest(dest), edge_label(label), weight(-1) {;}
 
 
-    Edge(Vertex src, Vertex dest, int w, string label)
+    Edge(Vertex src, Vertex dest, float w, string label)
         : src(src), dest(dest), edge_label(label), weight(w) {;}
 
 

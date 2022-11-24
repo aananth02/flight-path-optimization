@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "/workspaces/Desktop/cs225/flight-path-optimization/src/data.h"
+#include "data.h"
 
 using namespace std;
 

@@ -18,9 +18,11 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
         string dst = ad.getName(routes[i].dest_id);
         if (!vertexExists(src)) insertVertex(src);
         if (!vertexExists(dst)) insertVertex(dst);
-        float dist = pow((ad.getLatitude(routes[i].source_id) - ad.getLatitude(routes[i].dest_id)) , 2)
-                    +pow((ad.getLongitude(routes[i].source_id) - ad.getLongitude(routes[i].dest_id)), 2);
-        insertEdge(src, dst, dist, routes[i].airline_code);
+        float dist = distance(ad.getLatitude(routes[i].source_id), ad.getLongitude(routes[i].source_id),
+                              ad.getLatitude(routes[i].dest_id), ad.getLongitude(routes[i].dest_id));
+        if (!insertEdge(src, dst, dist, routes[i].airline_code)) {
+            adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first *= -1;
+        }
     }
 }
 
@@ -54,7 +56,7 @@ vector<Edge> Graph::getEdges() const {
     vector<Edge> ret;
     for (size_t i = 0; i < ver_index.size(); i++) {
         for (size_t j = 0; j < ver_index.size(); j++) {
-            if (i > j) ret.push_back(getEdge(ver_index[i], ver_index[j]));
+            if (adjacency_matrix[i][j].first > 0) ret.push_back(getEdge(ver_index[i], ver_index[j]));       // only gives positive edges (source->destination)
         }
     }
 
@@ -84,13 +86,13 @@ float Graph::getEdgeWeight(Vertex source, Vertex destination) const {
 
 void Graph::insertVertex(Vertex v) {
 
-    empty_edges.push_back(pair<int, string>(0, ""));
+    empty_edges.push_back(pair<float, string>(0, ""));
     ver_index.push_back(v);
 
     adjacency_matrix.push_back(empty_edges);
 
     for (size_t i = 0; i < adjacency_matrix.size() - 1; i++) {
-        adjacency_matrix[i].push_back(pair<int, string>(0, ""));       // 0 for no edge
+        adjacency_matrix[i].push_back(pair<float, string>(0, ""));       // 0 for no edge
     }
 }
 
@@ -134,9 +136,9 @@ Edge Graph::getEdge(Vertex source, Vertex destination) const {
 Edge Graph::removeEdge(Vertex source, Vertex destination) {
     if (adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)].first == 0) return Edge();
 
-    pair<int, string> e = adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)];
-    adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)] = pair<int, string>(0, "");
-    adjacency_matrix[getVertexIdx(destination)][getVertexIdx(source)] = pair<int, string>(0, "");
+    pair<float, string> e = adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)];
+    adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)] = pair<float, string>(0, "");
+    adjacency_matrix[getVertexIdx(destination)][getVertexIdx(source)] = pair<float, string>(0, "");
     return Edge(source, destination, e.first, e.second);
 }
 

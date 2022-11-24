@@ -7,7 +7,7 @@
 #include <math.h>
 #include "edge.h"
 #include "data.h"
-
+#include "utilities.h"
 using namespace std;
 
 class Graph {
