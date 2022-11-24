@@ -20,7 +20,7 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
         if (!vertexExists(dst)) insertVertex(dst);
         float dist = pow((ad.getLatitude(routes[i].source_id) - ad.getLatitude(routes[i].dest_id)) , 2)
                     +pow((ad.getLongitude(routes[i].source_id) - ad.getLongitude(routes[i].dest_id)), 2);
-        insertEdge(src, dst, dist, "");
+        insertEdge(src, dst, dist, routes[i].airline_code);
     }
 }
 
