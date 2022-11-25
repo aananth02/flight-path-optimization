@@ -35,7 +35,9 @@ void Traversal::BFS(const Graph& graph, const Vertex& vertex) {
 
 void Traversal::printgraph(const Graph& graph) {
     this->BFS(graph); //incase someone only calls the printgraph function
+    cout << "This function prints out the Airports in order of a BFS traversal" << endl;
     for (Vertex v : bfs_traversed_) {
         cout << v << std::endl;
     }
+    // Note: This function can later be developed to provide a animated updation of how a BFS traversal looks on a large graph
 }
