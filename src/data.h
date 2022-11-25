@@ -40,6 +40,7 @@ class Airport_data {
         float getLongitude(int id);
         float getLongitude(string Name);
         string getName(int id);
+        pair<string, pair<float, float>> getNameLatLong(int id);
     private:
         struct line {
             // This is a placeholder for the above struct to simply the extraction process

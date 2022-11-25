@@ -68,25 +68,25 @@ float Airport_data::getLatitude(int id) {
     for (auto i : airport_data) {
         if (i.id == id) return i.Latitude;
     }
-    return -1;
+    return 0;
 }
 float Airport_data::getLatitude(string Name) {
     for (auto i : airport_data) {
         if (i.Name == Name) return i.Latitude;
     }
-    return -1;
+    return 0;
 }
 float Airport_data::getLongitude(int id) {
     for (auto i : airport_data) {
         if (i.id == id) return i.Longitude;
     }
-    return -1;
+    return 0;
 }
 float Airport_data::getLongitude(string Name) {
     for (auto i : airport_data) {
         if (i.Name == Name) return i.Longitude;
     }
-    return -1;
+    return 0;
 }
 
 string Airport_data::getName(int id) {
@@ -96,6 +96,12 @@ string Airport_data::getName(int id) {
     return "";
 }
 
+pair<string, pair<float, float>> Airport_data::getNameLatLong(int id) {
+    for (auto i : airport_data) {
+        if (i.id == id) return pair<string, pair<float, float>>(i.Name, pair<float, float>(i.Latitude, i.Longitude));
+    }
+    return pair<string, pair<float, float>>("", pair<float, float>(0, 0));
+}
 
 // AIRLINE
 

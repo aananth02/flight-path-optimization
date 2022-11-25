@@ -13,25 +13,28 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
     directed = true;
     vector<route> routes = rd.getdata();
     for (size_t i = 0; i < routes.size(); i++) {
-
-        string src = ad.getName(routes[i].source_id);
-        string dst = ad.getName(routes[i].dest_id);
+        pair<string, pair<float, float>> src_details = ad.getNameLatLong(routes[i].source_id);
+        pair<string, pair<float, float>> dst_details = ad.getNameLatLong(routes[i].dest_id);
+        string src = src_details.first;
+        string dst = dst_details.first;
         if (!vertexExists(src)) insertVertex(src);
         if (!vertexExists(dst)) insertVertex(dst);
-        float dist = distance(ad.getLatitude(routes[i].source_id), ad.getLongitude(routes[i].source_id),
-                              ad.getLatitude(routes[i].dest_id), ad.getLongitude(routes[i].dest_id));
+        float dist = distance(src_details.second.first, src_details.second.second,
+                              dst_details.second.first, dst_details.second.second);
+        int src_idx = getVertexIdx(src);
+        int dst_idx = getVertexIdx(dst);
         if (!insertEdge(src, dst, dist, routes[i].airline_code)) {
-            if (adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first < 0) {
-                adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].first *= -1;
-                if (adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second != routes[i].airline_code) {
-                    adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second += " + " + routes[i].airline_code;
-                    adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].second += " + " + routes[i].airline_code;
+            if (adjacency_matrix[dst_idx][src_idx].first < 0) {
+                adjacency_matrix[dst_idx][src_idx].first *= -1;
+                if (adjacency_matrix[src_idx][dst_idx].second != routes[i].airline_code) {
+                    adjacency_matrix[src_idx][dst_idx].second += " + " + routes[i].airline_code;
+                    adjacency_matrix[dst_idx][src_idx].second += " + " + routes[i].airline_code;
                 }
             } else {
-                adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].first *= -1;
-                if (adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second != routes[i].airline_code) {
-                    adjacency_matrix[getVertexIdx(src)][getVertexIdx(dst)].second += " + " + routes[i].airline_code;
-                    adjacency_matrix[getVertexIdx(dst)][getVertexIdx(src)].second += " + " + routes[i].airline_code;
+                adjacency_matrix[src_idx][dst_idx].first *= -1;
+                if (adjacency_matrix[src_idx][dst_idx].second != routes[i].airline_code) {
+                    adjacency_matrix[src_idx][dst_idx].second += " + " + routes[i].airline_code;
+                    adjacency_matrix[dst_idx][src_idx].second += " + " + routes[i].airline_code;
                 }
             }
         }

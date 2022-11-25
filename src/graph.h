@@ -38,6 +38,7 @@ public:
     bool isDirected() const;
     void clear();
 
+    vector<Edge> ShortestPath(Vertex source, Vertex destinaton);
 private:
     vector<vector<pair<float, string>>> adjacency_matrix;
     vector<pair<float, string>> empty_edges;
