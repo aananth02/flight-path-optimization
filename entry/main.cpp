@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "graph.h"
+#include "traversal.h"
 using namespace std;
 
 int main() {
@@ -9,12 +10,13 @@ int main() {
     Airport_data test("../data/airports.dat");
     vector<airport> tmpdata = test.getdata();
 
-    Route_data test2("../data/routes_cleaned.csv");
+    Route_data test2("../data/routes_subset.dat");
     vector<route> tmp2data = test2.getdata();
     Graph gph(test, test2);
     
-    vector<Vertex> t = gph.getAdjacentDir("Rankin Inlet Airport", 1);
-    for (size_t i = 0; i < t.size(); i++) cout << t[i] << endl;
+    Traversal trav;
+    trav.printgraph(gph);
+
 
 
     return 0;

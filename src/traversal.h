@@ -16,10 +16,10 @@ using namespace std;
 
 class Traversal {
     public:
-        void BFS(const Graph& graph);
-        void BFS(const Graph& graph, const Vertex& vertex);
-        void printgraph();
+        void BFS(const Graph& graph); // no need to call this, but still implemented in public so it can be called if needed
+        void printgraph(const Graph& graph);
     private:
+        void BFS(const Graph& graph, const Vertex& vertex);
         vector<Vertex> bfs_traversed_;
         map<Vertex, string> label_vertices_;
         map<Edge, string> label_edges_;

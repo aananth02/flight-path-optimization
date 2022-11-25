@@ -27,13 +27,14 @@ void Traversal::BFS(const Graph& graph, const Vertex& vertex) {
                 label_vertices_[w] = true;
                 q.push(w);
             } else if (label_edges_[graph.getEdge(v, w)] == "UNEXPLORED") {
-                label_edges_[graph.getEdge(v, w)] == "CROSS";
+                label_edges_[graph.getEdge(v, w)] = "CROSS";
             }
         }
     }
 }
 
-void Traversal::printgraph() {
+void Traversal::printgraph(const Graph& graph) {
+    this->BFS(graph); //incase someone only calls the printgraph function
     for (Vertex v : bfs_traversed_) {
         cout << v << std::endl;
     }
