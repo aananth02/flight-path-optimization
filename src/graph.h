@@ -35,6 +35,7 @@ public:
     Vertex removeVertex(Vertex v);
     bool insertEdge(Vertex source, Vertex destination, float weight, string label);
     Edge removeEdge(Vertex source, Vertex destination);
+    int getVertexIdx(Vertex x) const;
     bool isDirected() const;
     void clear();
 
@@ -47,7 +48,5 @@ private:
 
     // if the graph is directed, then the weight of an edge is determined by the order of row and column for source and destination
     // adjacency_matrix[src][dest] > 0; adjacency_matrix[dest][src] < 0; 0 for no edge
-    bool directed;      
-
-    int getVertexIdx(Vertex x) const;
+    bool directed;
 };
