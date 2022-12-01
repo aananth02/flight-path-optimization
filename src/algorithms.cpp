@@ -40,8 +40,8 @@ vector<string> Algorithms::Path(const Graph& g, Vertex source, Vertex destinatio
     vector<string> path = { destination };
 
     while (source != destination) {
-        destination = p[g.getVertexIdx(source)][g.getVertexIdx(destination)];
+        destination = p[g.getVertexIdx(source)][g.getVertexIdx(destination)];       // Can add airline names on the required path by calling getEdge
         path.push_back(destination);
     }
-    return path;
+    return path;        // path goes to source starting from destination; destination -> -> -> ->....-> ->source
 }

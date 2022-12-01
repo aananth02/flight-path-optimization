@@ -5,9 +5,9 @@ using namespace std;
 
 // There are subset data files created for small test : routes_subset
 
-Airport_data test_airport1("../data/airports.dat");
-Route_data test_routes1("../data/routes_subset.dat");
-Graph test_graph(test_airport1, test_routes1);
+Airport_data test_airport1_2("../data/airports.dat");
+Route_data test_routes1_2("../data/routes_subset.dat");
+Graph test_graph_1(test_airport1_2, test_routes1_2);
 
 TEST_CASE("Small BFS Traversal", "[traversal]") {
     Traversal trav;
@@ -19,8 +19,8 @@ TEST_CASE("Small BFS Traversal", "[traversal]") {
 // Tests on Larger Dataset
 // Note: These tests take a long time to compile and run
 
-Route_data test_routes2("../data/routes_cleaned.csv");
-Graph test_graph_large(test_airport1, test_routes2);
+Route_data test_routes2_2("../data/routes_cleaned.csv");
+Graph test_graph_large_1(test_airport1_2, test_routes2_2);
 
 TEST_CASE("Large BFS Traversal", "[traversal]") {
     Traversal trav;

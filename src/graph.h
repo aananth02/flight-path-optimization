@@ -37,6 +37,7 @@ public:
     Edge removeEdge(Vertex source, Vertex destination);
     bool isDirected() const;
     void clear();
+    int getVertexIdx(Vertex x) const;
 
     vector<Edge> ShortestPath(Vertex source, Vertex destinaton);
 private:
@@ -49,5 +50,4 @@ private:
     // adjacency_matrix[src][dest] > 0; adjacency_matrix[dest][src] < 0; 0 for no edge
     bool directed;      
 
-    int getVertexIdx(Vertex x) const;
 };
