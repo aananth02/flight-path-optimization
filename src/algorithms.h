@@ -8,5 +8,5 @@ class Algorithms {
         std::string BetweennessCentrality(const Graph &g, vector<std::string> vert);
         Graph Kruskal(Graph inputGraph);
     private:
-        vector<vector<Vertex>> p;
+        vector<vector<Vertex>> paths;
 };
