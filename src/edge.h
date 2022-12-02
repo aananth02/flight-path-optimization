@@ -38,7 +38,5 @@ class Edge
             return false;
         return true;
     };
-
-  private:
     
 };
