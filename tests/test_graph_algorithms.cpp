@@ -15,13 +15,15 @@ Graph test_graph_2(test_airport1_3, test_routes1_3);
 Algorithms test_algorithms;
 
 // test_algorithms
-TEST_CASE("Path Doesn't Exist Small", "[graph]") {
+TEST_CASE("Path Doesn't Exist Small", "[graph]")
+{
     test_algorithms.Floyd_Warshall(test_graph_2);
-    REQUIRE(test_algorithms.Path(test_graph_2, "Mount Hagen Kagamuga Airport", "Goroka Airport").size() == 0);        // Direction Check
-    REQUIRE(test_algorithms.Path(test_graph_2, "Madang Airport", "Mount Hagen Kagamuga Airport").size() == 0);        // No Edge Check
+    REQUIRE(test_algorithms.Path(test_graph_2, "Mount Hagen Kagamuga Airport", "Goroka Airport").size() == 0); // Direction Check
+    REQUIRE(test_algorithms.Path(test_graph_2, "Madang Airport", "Mount Hagen Kagamuga Airport").size() == 0); // No Edge Check
 }
 
-TEST_CASE("Path Single Edge", "[graph]") {
+TEST_CASE("Path Single Edge", "[graph]")
+{
     test_algorithms.Floyd_Warshall(test_graph_2);
     vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Mount Hagen Kagamuga Airport");
     REQUIRE(path.size() == 1);
@@ -44,16 +46,14 @@ Route_data test_routes2_3("../data/routes_cleaned.csv");
 Graph test_graph_large_2(test_airport1_3, test_routes2_3);
 Algorithms test_algorithms1;
 
-
-
 // TEST_CASE("Path Doesn't Exist Small", "[graph]") {
-    // test_algorithms1.Floyd_Warshall(test_graph_large_2);
+// test_algorithms1.Floyd_Warshall(test_graph_large_2);
 //     REQUIRE(test_algorithms.Path(test_graph, "Mount Hagen Kagamuga Airport", "Goroka Airport").size() == 0);        // Direction Check
 //     REQUIRE(test_algorithms.Path(test_graph, "Madang Airport", "Mount Hagen Kagamuga Airport").size() == 0);        // No Edge Check
 // }
 
 // TEST_CASE("Path Single Edge", "[graph]") {
-    // test_algorithms1.Floyd_Warshall(test_graph_large_2);
+// test_algorithms1.Floyd_Warshall(test_graph_large_2);
 //     vector<string> path = test_algorithms.Path(test_graph, "Goroka Airport", "Mount Hagen Kagamuga Airport");
 //     REQUIRE(path.size() == 1);
 //     REQUIRE(path[0] == "Goroka Airport");
@@ -61,7 +61,7 @@ Algorithms test_algorithms1;
 // }
 
 // TEST_CASE("Path Multiple Edges", "[graph]") {
-    // test_algorithms1.Floyd_Warshall(test_graph_large_2);
+// test_algorithms1.Floyd_Warshall(test_graph_large_2);
 //     vector<string> path = test_algorithms.Path(test_graph, "Goroka Airport", "Mount Hagen Kagamuga Airport");
 //     REQUIRE(path.size() == 1);
 //     REQUIRE(path[0] == "Goroka Airport");

@@ -10,21 +10,21 @@
 #include "utilities.h"
 using namespace std;
 
-class Graph {
+class Graph
+{
 public:
-
     Graph(bool weighted);
     Graph(bool weighted, bool directed);
-    Graph(Airport_data& ad, Route_data& rd);
+    Graph(Airport_data &ad, Route_data &rd);
 
     // dir = 1 is when v acts as source, dir = -1 when v acts as destination, dir = 0 when we only care about adjacency
-    vector<Vertex> getAdjacentDir(Vertex v, int dir) const;      
-    
+    vector<Vertex> getAdjacentDir(Vertex v, int dir) const;
+
     vector<Vertex> getVertices() const;
     Edge getEdge(Vertex source, Vertex destination) const;
     vector<Edge> getEdges() const;
 
-    bool vertexExists (Vertex v) const;
+    bool vertexExists(Vertex v) const;
     bool edgeExists(Vertex source, Vertex destination) const;
 
     void setEdgeLabel(Vertex source, Vertex destination, string label);
@@ -35,12 +35,13 @@ public:
     Vertex removeVertex(Vertex v);
     bool insertEdge(Vertex source, Vertex destination, float weight, string label);
     Edge removeEdge(Vertex source, Vertex destination);
-    int getVertexIdx(Vertex x) const;
+    // int getVertexIdx(Vertex x) const;
     bool isDirected() const;
     void clear();
     int getVertexIdx(Vertex x) const;
 
     vector<Edge> ShortestPath(Vertex source, Vertex destinaton);
+
 private:
     vector<vector<pair<float, string>>> adjacency_matrix;
     vector<pair<float, string>> empty_edges;
