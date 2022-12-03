@@ -38,7 +38,6 @@ public:
     int getVertexIdx(Vertex x) const;
     bool isDirected() const;
     void clear();
-    int getVertexIdx(Vertex x) const;
 
     vector<Edge> ShortestPath(Vertex source, Vertex destinaton);
 private:
