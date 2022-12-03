@@ -15,7 +15,7 @@ class Graph
 public:
     Graph(bool weighted);
     Graph(bool weighted, bool directed);
-    Graph(Airport_data &ad, Route_data &rd);
+    Graph(Airport_data &airport_data, Route_data &rd);
 
     // dir = 1 is when v acts as source, dir = -1 when v acts as destination, dir = 0 when we only care about adjacency
     vector<Vertex> getAdjacentDir(Vertex v, int dir) const;

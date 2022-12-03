@@ -1,7 +1,13 @@
+#include <iostream>
+using namespace std;
+#include <limits.h>
 #include "algorithms.h"
 #include "dsets.h"
 #include <map>
 #include <algorithm>
+
+// Number of vertices in the graph
+
 
 /// @brief Travellers like to keep their travelling time to a minimum. In most parts of the world,
 /// travel time correlates with the distance between the passenger's Point of Departure and Point of Arrival
@@ -13,15 +19,15 @@ void Algorithms::Floyd_Warshall(const Graph &inputGraph)
     vector<float> tmp(inputGraph.getVertices().size(), 25000);
     vector<vector<float>> d(inputGraph.getVertices().size(), tmp);
     vector<Vertex> tmp2(inputGraph.getVertices().size(), "");
-    paths = vector<vector<Vertex>>(inputGraph.getVertices().size(), tmp2);
+    this->paths = vector<vector<Vertex>>(inputGraph.getVertices().size(), tmp2);
     for (Vertex v : inputGraph.getVertices())
     {
         d[inputGraph.getVertexIdx(v)][inputGraph.getVertexIdx(v)] = 0;
     }
-    for (auto i : inputGraph.getEdges())
+    for (auto input_edge : inputGraph.getEdges())
     {
-        if (i.weight > 0)
-            d[inputGraph.getVertexIdx(i.src)][inputGraph.getVertexIdx(i.dest)] = i.weight;
+        if (input_edge.weight > 0)
+            d[inputGraph.getVertexIdx(input_edge.src)][inputGraph.getVertexIdx(input_edge.dest)] = input_edge.weight;
     }
     for (Vertex v : inputGraph.getVertices())
     {
@@ -141,39 +147,7 @@ Graph Algorithms::Kruskal(Graph inputGraph)
     return output;
 }
 
-// /// @brief Kruskal's algorithm is one of the ways in which a Minimum Spanning Tree for a graph is commonly built.
-// // In the context of our Airports and Routes Graph, a Minimum Spanning Tree is basically a backpacker's gudie to the world:
-// // The cheapest way to cover the world, the cheapest possible next destination from anywhere they are right now!
-// /// @param inputGraph : Our original graph of airport and routes data, consistsing of all possible edges, etc.
-// /// @return : Minimum Spanning Tree of out airports and routes graph.
-// Graph Algorithms::Kruskal(Graph inputGraph) {
-//     //  Disjoint Set setup
-//     DisjointSets forest;
-//     vector<Vertex> input_graph_vertices = inputGraph.getVertices();
-//     std::map<Vertex, int> vertex_to_vertex_num;
-//     int num_vertices = 0;
-//     for (int vertex_num = 0; vertex_num < int(input_graph_vertices.size()); vertex_num++) {
-//         vertex_to_vertex_num.insert(std::pair<Vertex, int>(input_graph_vertices.at(vertex_num), vertex_num));
-//         num_vertices++;
-//     }
-//     forest.addelements(num_vertices);
+vector<vector<Vertex>> Algorithms::getPaths() {
+    return this->paths;
+}
 
-//     // Building Priority Queue
-//     vector<Edge> priorityEdges = inputGraph.getEdges();
-//     std::sort(priorityEdges.begin(), priorityEdges.end());
-
-//     Graph output = Graph(true);
-//     for (auto vertex: input_graph_vertices) {
-//         output.insertVertex(vertex);
-//     }
-
-//     while (output.getEdges().size() < input_graph_vertices.size() - 1) {
-//         Edge min_edge = priorityEdges.at(0);
-//         priorityEdges.erase(priorityEdges.begin());
-//         if (forest.find(vertex_to_vertex_num[min_edge.src]) != forest.find(vertex_to_vertex_num[min_edge.dest])) {
-//             output.insertEdge(min_edge.src, min_edge.dest, min_edge.weight, min_edge.edge_label);
-//             forest.setunion(forest.find(vertex_to_vertex_num[min_edge.src]), forest.find(vertex_to_vertex_num[min_edge.dest]));
-//         }
-//     }
-//     return output;
-// }

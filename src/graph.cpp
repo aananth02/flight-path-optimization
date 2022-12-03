@@ -1,5 +1,4 @@
 #include "graph.h"
-
 Graph::Graph(bool weighted) : weighted(weighted),directed(false) {
     ;
 }
@@ -7,14 +6,16 @@ Graph::Graph(bool weighted) : weighted(weighted),directed(false) {
 Graph::Graph(bool weighted, bool directed) : weighted(weighted),directed(directed) {
     ;
 }
-
-Graph::Graph(Airport_data& ad, Route_data& rd) {
+/// @brief 
+/// @param airport_data 
+/// @param route_data
+Graph::Graph(Airport_data& airport_data, Route_data& route_data) {
     weighted = true;
     directed = true;
-    vector<route> routes = rd.getdata();
+    vector<route> routes = route_data.getdata();
     for (size_t i = 0; i < routes.size(); i++) {
-        pair<string, pair<float, float>> src_details = ad.getNameLatLong(routes[i].source_id);
-        pair<string, pair<float, float>> dst_details = ad.getNameLatLong(routes[i].dest_id);
+        pair<string, pair<float, float>> src_details = airport_data.getNameLatLong(routes[i].source_id);
+        pair<string, pair<float, float>> dst_details = airport_data.getNameLatLong(routes[i].dest_id);
         string src = src_details.first;
         string dst = dst_details.first;
         if (!vertexExists(src)) insertVertex(src);
@@ -41,6 +42,10 @@ Graph::Graph(Airport_data& ad, Route_data& rd) {
     }
 }
 
+/// @brief 
+/// @param v 
+/// @param dir 
+/// @return 
 vector<Vertex> Graph::getAdjacentDir(Vertex v, int dir) const {
     int idx = getVertexIdx(v);
     vector<Vertex> to_ret;
@@ -67,6 +72,8 @@ vector<Vertex> Graph::getVertices() const {
 }
 
 
+/// @brief 
+/// @return 
 vector<Edge> Graph::getEdges() const {
     vector<Edge> ret;
     for (size_t i = 0; i < ver_index.size(); i++) {
@@ -81,6 +88,7 @@ vector<Edge> Graph::getEdges() const {
 bool Graph::vertexExists(Vertex v) const {
     return (getVertexIdx(v) != -1);
 }
+
 
 bool Graph::edgeExists(Vertex source, Vertex destination) const {
     return adjacency_matrix[getVertexIdx(source)][getVertexIdx(destination)].first;
