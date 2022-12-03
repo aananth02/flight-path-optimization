@@ -28,7 +28,7 @@ int main() {
     Algorithms test_algorithms;
     test_algorithms.Floyd_Warshall(test_graph_2);
     vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
-    vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Nadzab Airport");
+    vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
     std::cout << "-------------------------------------------------" << std::endl;
     std::cout << "Path Size: " << int(path.size()) << std::endl;
     if (path.size() > 0) {
@@ -44,8 +44,5 @@ int main() {
         std::cout << "\n\n\n" << std::endl;
         std::cout << "-----Path Complete-----" << std::endl;
     }
-    
-
-   
     return 0;
 }
