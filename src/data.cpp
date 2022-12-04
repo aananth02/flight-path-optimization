@@ -157,6 +157,7 @@ airline Airline_data::conv_line(airline& l) {
 }
 
 Route_data::Route_data(string filename) {
+    route_data.clear();
     ifstream wordsFile(filename);
     if (wordsFile.is_open()) {
         route l;

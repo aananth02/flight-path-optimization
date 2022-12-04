@@ -18,8 +18,15 @@ Graph::Graph(Airport_data& airport_data, Route_data& route_data) {
         pair<string, pair<float, float>> dst_details = airport_data.getNameLatLong(routes[i].dest_id);
         string src = src_details.first;
         string dst = dst_details.first;
-        if (!vertexExists(src)) insertVertex(src);
-        if (!vertexExists(dst)) insertVertex(dst);
+        // cout << src << " " << dst << endl;
+        if (!vertexExists(src)) {
+            insertVertex(src);
+            // cout << "Inserting src: " << src << endl;
+        }
+        if (!vertexExists(dst)) {
+            insertVertex(dst);
+            // cout << "Inserting dst: " << dst << endl;
+        }
         float dist = distance(src_details.second.first, src_details.second.second,
                               dst_details.second.first, dst_details.second.second);
         int src_idx = getVertexIdx(src);

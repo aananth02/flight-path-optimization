@@ -40,7 +40,7 @@ public:
     void clear();
 
     vector<vector<pair<float, string>>> getAdjacencyMatrix() {return adjacency_matrix;}
-
+    vector<Vertex> getVer() {return ver_index;}
     vector<Edge> ShortestPath(Vertex source, Vertex destinaton);
 
 private:

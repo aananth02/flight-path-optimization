@@ -18,6 +18,7 @@ int main() {
 
     vector<airport> airport_data = test_airports.getdata();
     vector<route> route_data = test_routes.getdata();
+
     vector<Vertex> vertices = test_graph.getVertices();
     vector<Edge> edges = test_graph.getEdges();
     
@@ -30,7 +31,7 @@ int main() {
     Algorithms test_algorithms;
     vector<Edge> edges_copy_to_sort = test_graph.getEdges();
     vector<vector<pair<float, string>>> adjacenecy_matrix = test_graph.getAdjacencyMatrix();
-    std::sort(edges_copy_to_sort.begin(), edges_copy_to_sort.end());
+    // std::sort(edges_copy_to_sort.begin(), edges_copy_to_sort.end());
 
     test_algorithms.Floyd_Warshall(test_graph);
     vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
@@ -62,12 +63,15 @@ int main() {
         std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
         counter++;
     }
-
+    // std::vector<Vertex> x = test_graph.getVer();
     // Printing Adjacenecy Matrix
+    // for (size_t i = 0; i < x.size(); i++) {
+    //     cout << x[i] << " | ";
+    // }
     std::cout << "\n\nAdjacency Matrix" << std::endl;
-    for (vector<pair<float, string>> row: adjacenecy_matrix) {
-        for (int index = 0; index < int(row.size()); index++) {
-            pair<float, string> point = row.at(index);
+    for (size_t i = 0; i < adjacenecy_matrix.size(); i++) {
+        for (size_t j = 0; j < adjacenecy_matrix[i].size(); j++) {
+            pair<float, string> point = adjacenecy_matrix[i][j];
             std::cout << std::to_string(point.first) << ", " << point.second << " | ";
         }
         std::cout << "\n";
