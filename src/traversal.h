@@ -18,6 +18,8 @@ class Traversal {
     public:
         void BFS(const Graph& graph); // no need to call this, but still implemented in public so it can be called if needed
         void printgraph(const Graph& graph);
+        map<Vertex, string> getVertexLabels();
+        map<Edge, string> getEdgeLabels();
     private:
         void BFS(const Graph& graph, const Vertex& vertex);
         vector<Vertex> bfs_traversed_;

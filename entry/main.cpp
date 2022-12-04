@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "graph.h"
 #include "traversal.h"
 #include "../src/graph.h"
@@ -10,25 +11,32 @@ using namespace std;
 
 int main() {
 
-    cout << "MAIN FILE REACHED" << endl;
+    // Setup: Dataset loading, graph construction, etc.
+    Airport_data test_airports("../data/airports.dat");
+    Route_data test_routes("../data/routes_subset.dat");
+    Graph test_graph(test_airports, test_routes);
 
-    Airport_data test("../data/airports.dat");
-    vector<airport> tmpdata = test.getdata();
+    vector<airport> airport_data = test_airports.getdata();
+    vector<route> route_data = test_routes.getdata();
+    vector<Vertex> vertices = test_graph.getVertices();
+    vector<Edge> edges = test_graph.getEdges();
+    
+    // Traversal testing
+    Traversal traversal;
+    std::cout << "BFS Ordering: " << std::endl;
+    traversal.printgraph(test_graph);
 
-    Route_data test2("../data/routes_subset.dat");
-    vector<route> tmp2data = test2.getdata();
-    Graph gph(test, test2);
-
-    Traversal trav;
-    trav.printgraph(gph);
-
-    Airport_data test_airport1_3("../data/airports.dat");
-    Route_data test_routes1_3("../data/routes_subset.dat");
-    Graph test_graph_2(test_airport1_3, test_routes1_3);
+    // Algorithms testing
     Algorithms test_algorithms;
-    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<Edge> edges_copy_to_sort = test_graph.getEdges();
+    vector<vector<pair<float, string>>> adjacenecy_matrix = test_graph.getAdjacencyMatrix();
+    std::sort(edges_copy_to_sort.begin(), edges_copy_to_sort.end());
+
+    test_algorithms.Floyd_Warshall(test_graph);
     vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
-    vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
+    vector<string> path = test_algorithms.Path(test_graph, "Port Moresby Jacksons International Airport", "Madang Airport");
+    
+    
     std::cout << "-------------------------------------------------" << std::endl;
     std::cout << "Path Size: " << int(path.size()) << std::endl;
     if (path.size() > 0) {
@@ -43,6 +51,26 @@ int main() {
         }
         std::cout << "\n\n\n" << std::endl;
         std::cout << "-----Path Complete-----" << std::endl;
+    }
+
+    // Kruskal Testing
+
+    // Print Edges in sorted order
+    std::cout << "\n\nEdges In Sorted Order" << std::endl;
+    int counter = 1;
+    for (Edge edge: edges_copy_to_sort) {
+        std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
+        counter++;
+    }
+
+    // Printing Adjacenecy Matrix
+    std::cout << "\n\nAdjacency Matrix" << std::endl;
+    for (vector<pair<float, string>> row: adjacenecy_matrix) {
+        for (int index = 0; index < int(row.size()); index++) {
+            pair<float, string> point = row.at(index);
+            std::cout << std::to_string(point.first) << ", " << point.second << " | ";
+        }
+        std::cout << "\n";
     }
     return 0;
 }

@@ -6,9 +6,9 @@ Graph::Graph(bool weighted) : weighted(weighted),directed(false) {
 Graph::Graph(bool weighted, bool directed) : weighted(weighted),directed(directed) {
     ;
 }
-/// @brief 
-/// @param airport_data 
-/// @param route_data
+/// @brief Constructs graph from parameters.
+/// @param airport_data Dataset of aiports, their codes, longitudes, latitudes, etc.
+/// @param route_data Datset of active flight routes between airports
 Graph::Graph(Airport_data& airport_data, Route_data& route_data) {
     weighted = true;
     directed = true;
@@ -40,6 +40,8 @@ Graph::Graph(Airport_data& airport_data, Route_data& route_data) {
             }
         }
     }
+
+    std::cout << "Last route: " << "Source: " << routes.at(routes.size() - 1).source_code << " | Dest: " << routes.at(routes.size() - 1).dest_code << std::endl;
 }
 
 /// @brief 
