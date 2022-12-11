@@ -114,6 +114,8 @@ int main()
     char source[60];
     char dest[60];
     cout << "Enter source airport name: ";
+
+    // Examples airport names (feel free to add more if you want to)
     // Port Moresby Jacksons International Airport
     // Wewak International Airport
     // Goroka Airport
