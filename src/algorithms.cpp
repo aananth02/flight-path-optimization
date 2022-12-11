@@ -8,7 +8,6 @@ using namespace std;
 
 // Number of vertices in the graph
 
-
 /// @brief Travellers like to keep their travelling time to a minimum. In most parts of the world,
 /// travel time correlates with the distance between the passenger's Point of Departure and Point of Arrival
 /// We're using Floyd-Warshall's algorithm to find the minimum distance.
@@ -63,27 +62,32 @@ void Algorithms::Floyd_Warshall(const Graph &inputGraph)
 /// @param inputGraph adjacency graph
 /// @param vertices vector obtained from Algorithms::Path
 /// @return return vertex
-std::string Algorithms::BetweennessCentrality(const Graph &inputGraph, vector<std::string> vertices)
+
+betweeness Algorithms::BetweennessCentrality(const Graph &inputGraph, vector<std::string> vertices)
 {
-    int max_count = 0;
-    std::string central;
+    betweeness ans;
+    if (vertices.empty())
+    {
+        ans.central = "not found to exist";
+        ans.maxCount = -1;
+    }
     for (auto vertex1 : vertices)
     {
         int count = 0;
-        for (auto vertex2 : vertices)
+        for (auto vertex2 : inputGraph.getVertices())
         {
             if (inputGraph.edgeExists(vertex1, vertex2))
             {
                 count++;
             }
         }
-        if (count > max_count)
+        if (count > ans.maxCount)
         {
-            max_count = count;
-            central = vertex1;
+            ans.maxCount = count;
+            ans.central = vertex1;
         }
     }
-    return central;
+    return ans;
 }
 
 /// @brief
@@ -93,6 +97,10 @@ std::string Algorithms::BetweennessCentrality(const Graph &inputGraph, vector<st
 /// @return
 vector<string> Algorithms::Path(const Graph &inputGraph, Vertex source, Vertex destination)
 {
+    if (inputGraph.getVertexIdx(source) == -1 || inputGraph.getVertexIdx(destination) == -1)
+    {
+        return {};
+    }
     if (paths[inputGraph.getVertexIdx(source)][inputGraph.getVertexIdx(destination)] == "")
         return {};
     vector<string> path = {destination};
@@ -102,6 +110,7 @@ vector<string> Algorithms::Path(const Graph &inputGraph, Vertex source, Vertex d
         destination = paths[inputGraph.getVertexIdx(source)][inputGraph.getVertexIdx(destination)];
         path.push_back(destination);
     }
+    std::reverse(path.begin(), path.end());
     return path; // path goes to source starting from destination; destination -> -> -> ->....-> ->source
 }
 
@@ -147,7 +156,7 @@ Graph Algorithms::Kruskal(Graph inputGraph)
     return output;
 }
 
-vector<vector<Vertex>> Algorithms::getPaths() {
+vector<vector<Vertex>> Algorithms::getPaths()
+{
     return this->paths;
 }
-

@@ -9,72 +9,142 @@
 #define V 9
 using namespace std;
 
-int main() {
+int main()
+{
 
-    // Setup: Dataset loading, graph construction, etc.
-    Airport_data test_airports("../data/airports.dat");
-    Route_data test_routes("../data/routes_subset.dat");
-    Graph test_graph(test_airports, test_routes);
+    // // Setup: Dataset loading, graph construction, etc.
+    // Airport_data test_airports("../data/airports.dat");
+    // Route_data test_routes("../data/routes_subset.dat");
+    // Graph test_graph(test_airports, test_routes);
 
-    vector<airport> airport_data = test_airports.getdata();
-    vector<route> route_data = test_routes.getdata();
+    // vector<airport> airport_data = test_airports.getdata();
+    // vector<route> route_data = test_routes.getdata();
 
-    vector<Vertex> vertices = test_graph.getVertices();
-    vector<Edge> edges = test_graph.getEdges();
-    
-    // Traversal testing
-    Traversal traversal;
-    std::cout << "BFS Ordering: " << std::endl;
-    traversal.printgraph(test_graph);
+    // vector<Vertex> vertices = test_graph.getVertices();
+    // vector<Edge> edges = test_graph.getEdges();
 
-    // Algorithms testing
-    Algorithms test_algorithms;
-    vector<Edge> edges_copy_to_sort = test_graph.getEdges();
-    vector<vector<pair<float, string>>> adjacenecy_matrix = test_graph.getAdjacencyMatrix();
-    // std::sort(edges_copy_to_sort.begin(), edges_copy_to_sort.end());
+    // // Traversal testing
+    // Traversal traversal;
+    // std::cout << "BFS Ordering: " << std::endl;
+    // traversal.printgraph(test_graph);
 
-    test_algorithms.Floyd_Warshall(test_graph);
-    vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
-    vector<string> path = test_algorithms.Path(test_graph, "Port Moresby Jacksons International Airport", "Madang Airport");
-    
-    
-    std::cout << "-------------------------------------------------" << std::endl;
-    std::cout << "Path Size: " << int(path.size()) << std::endl;
-    if (path.size() > 0) {
-        for (auto st: path) {
-            std::cout << st << std::endl;
-        }
-    }
+    // // Algorithms testing
+    // Algorithms test_algorithms;
+    // vector<Edge> edges_copy_to_sort = test_graph.getEdges();
+    // vector<vector<pair<float, string>>> adjacenecy_matrix = test_graph.getAdjacencyMatrix();
+    // // std::sort(edges_copy_to_sort.begin(), edges_copy_to_sort.end());
 
-    for (int path_index = 0; path_index < int(floyd_output.size()); path_index++) {
-        for (Vertex vertex : floyd_output.at(path_index)) {
-            std::cout << vertex << "-> ";
-        }
-        std::cout << "\n\n\n" << std::endl;
-        std::cout << "-----Path Complete-----" << std::endl;
-    }
+    // test_algorithms.Floyd_Warshall(test_graph);
+    // vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
+    // vector<string> path = test_algorithms.Path(test_graph, "Port Moresby Jacksons International Airport", "Madang Airport");
 
-    // Kruskal Testing
-
-    // Print Edges in sorted order
-    std::cout << "\n\nEdges In Sorted Order" << std::endl;
-    int counter = 1;
-    for (Edge edge: edges_copy_to_sort) {
-        std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
-        counter++;
-    }
-    // std::vector<Vertex> x = test_graph.getVer();
-    // Printing Adjacenecy Matrix
-    // for (size_t i = 0; i < x.size(); i++) {
-    //     cout << x[i] << " | ";
+    // std::cout << "-------------------------------------------------" << std::endl;
+    // std::cout << "Path Size: " << int(path.size()) << std::endl;
+    // if (path.size() > 0)
+    // {
+    //     for (auto st : path)
+    //     {
+    //         std::cout << st << std::endl;
+    //     }
     // }
-    std::cout << "\n\nAdjacency Matrix" << std::endl;
-    for (size_t i = 0; i < adjacenecy_matrix.size(); i++) {
-        for (size_t j = 0; j < adjacenecy_matrix[i].size(); j++) {
-            pair<float, string> point = adjacenecy_matrix[i][j];
-            std::cout << std::to_string(point.first) << ", " << point.second << " | ";
-        }
-        std::cout << "\n";
+
+    // for (int path_index = 0; path_index < int(floyd_output.size()); path_index++)
+    // {
+    //     for (Vertex vertex : floyd_output.at(path_index))
+    //     {
+    //         std::cout << vertex << "-> ";
+    //     }
+    //     std::cout << "\n\n\n"
+    //               << std::endl;
+    //     std::cout << "-----Path Complete-----" << std::endl;
+    // }
+
+    // // Kruskal Testing
+
+    // // Print Edges in sorted order
+    // std::cout << "\n\nEdges In Sorted Order" << std::endl;
+    // int counter = 1;
+    // for (Edge edge : edges_copy_to_sort)
+    // {
+    //     std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
+    //     counter++;
+    // }
+    // // std::vector<Vertex> x = test_graph.getVer();
+    // // Printing Adjacenecy Matrix
+    // // for (size_t i = 0; i < x.size(); i++) {
+    // //     cout << x[i] << " | ";
+    // // }
+    // std::cout << "\n\nAdjacency Matrix" << std::endl;
+    // for (size_t i = 0; i < adjacenecy_matrix.size(); i++)
+    // {
+    //     for (size_t j = 0; j < adjacenecy_matrix[i].size(); j++)
+    //     {
+    //         pair<float, string> point = adjacenecy_matrix[i][j];
+    //         std::cout << std::to_string(point.first) << ", " << point.second << " | ";
+    //     }
+    //     std::cout << "\n";
+    // }
+    // Airport_data test_airport1_3("../data/airports.dat");
+    // Route_data test_routes1_3("../data/routes_subset.dat");
+    // Graph test_graph_2(test_airport1_3, test_routes1_3);
+    // Algorithms test_algorithms;
+    // std::cout << "-----Path2 Complete-----" << std::endl;
+    // test_algorithms.Floyd_Warshall(test_graph_2);
+    // vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
+    // vector<string> path2 = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Wewak International Airport");
+    // for (auto airport : path2)
+    // {
+    //     std::cout << airport << std::endl;
+    // }
+
+    // REQUIRE(path.size() == 3);
+    // REQUIRE(path[0] == "Port Moresby Jacksons International Airport");
+    // REQUIRE(path[1] == "Nadzab Airport");
+    // REQUIRE(path[2] == "Madang Airport");
+    // std::cout << test_algorithms.BetweennessCentrality(test_graph_2, path2) << std::endl;
+
+    // shortest path
+    std::cout << "-----Shortest Path Demo-----" << std::endl;
+    std::cout << std::endl;
+    Airport_data test_airport1_3("../data/airports.dat");
+    Route_data test_routes1_3("../data/routes_subset.dat");
+    Graph test_graph_2(test_airport1_3, test_routes1_3);
+    Algorithms test_algorithms;
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    char source[60];
+    char dest[60];
+    cout << "Enter source airport name: ";
+    // Port Moresby Jacksons International Airport
+    // Wewak International Airport
+    // Goroka Airport
+
+    cin.getline(source, 60);
+    cout << "Enter destination airport name: ";
+    cin.getline(dest, 60);
+    vector<string> path = test_algorithms.Path(test_graph_2, source, dest);
+    std::cout << "Shortest path from " << source << " to " << dest << " is " << path.size() << " steps-: " << std::endl;
+    if (path.empty())
+    {
+        std::cout << "Path doesnt exist" << std::endl;
     }
+    else
+    {
+        for (auto airport : path)
+        {
+            std::cout << airport << " -> ";
+        }
+        std::cout << "reached" << std::endl;
+    }
+    std::cout << std::endl;
+
+    // betweeness centrality
+    std::cout << std::endl;
+    std::cout << "-----Betweeness Centrality Demo-----" << std::endl;
+    std::cout << std::endl;
+    std::cout << "The most prominent transit hub is " << test_algorithms.BetweennessCentrality(test_graph_2, path).central << " as it is connected to " << test_algorithms.BetweennessCentrality(test_graph_2, path).maxCount << " ports" << std::endl;
+
+    // minimum spanning tree
+    std::cout << std::endl;
+
     return 0;
 }

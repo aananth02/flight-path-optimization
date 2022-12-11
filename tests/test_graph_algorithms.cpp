@@ -22,16 +22,19 @@ TEST_CASE("Path Doesn't Exist Small", "[graph]")
     REQUIRE(test_algorithms.Path(test_graph_2, "Madang Airport", "Mount Hagen Kagamuga Airport").size() == 0); // No Edge Check
 }
 
-TEST_CASE("Path Connectedo To Itself", "[graph]") {
+TEST_CASE("Path Connectedo To Itself", "[graph]")
+{
     vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Geroka Airport");
     REQUIRE(path.size() == 0);
 }
 
-TEST_CASE("Path Single Edge", "[graph]") {
-    vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Madang Airport");
-    REQUIRE(path.size() == 1);
-    REQUIRE(path[0] == "Goroka Airport");
-    REQUIRE(path[1] == "Mount Hagen Kagamuga Airport");
+TEST_CASE("Path Single Edge", "[graph]")
+{
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Mount Hagen Kagamuga Airport");
+    REQUIRE(path.size() == 2);
+    REQUIRE(path[1] == "Goroka Airport");
+    REQUIRE(path[0] == "Mount Hagen Kagamuga Airport");
 }
 
 TEST_CASE("Path Multiple Edges", "[graph]")
@@ -45,7 +48,6 @@ TEST_CASE("Path Multiple Edges", "[graph]")
 }
 
 // FLOYD TESTING
-
 
 TEST_CASE("Floyd Test", "[graph]")
 {
@@ -78,12 +80,11 @@ TEST_CASE("Floyd Test", "[graph]")
     to_compare.push_back(to_add);
 
     vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
-    for (auto to_find: to_compare) {
-        REQUIRE(std::find (floyd_output.begin(), floyd_output.end(), to_find) != floyd_output.end());
+    for (auto to_find : to_compare)
+    {
+        REQUIRE(std::find(floyd_output.begin(), floyd_output.end(), to_find) != floyd_output.end());
     }
-    //REQUIRE(floyd_output.size() == to_compare.size());
-   
-
+    // REQUIRE(floyd_output.size() == to_compare.size());
 }
 
 // TEST_CASE("Path Multiple Edges", "[graph]") {
