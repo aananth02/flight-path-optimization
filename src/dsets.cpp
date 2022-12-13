@@ -49,26 +49,26 @@ void DisjointSets::setunion(int a, int b) {
          return;
     }
     if (a_size <= b_size) {
-        auto x = size(a_root);
-        set_rep[a_root] = b_root;
-        set_rep[b_root] -= x;
-        // for (size_t index = 0; index < set_rep.size(); index++) {
-        //     if (static_cast<int>(index) == a_root || set_rep.at(index) == a_root) {
-        //         set_rep.at(index) = b_root;
-        //         set_rep.at(b_root) -= 1;
-        //     }
-        // }
+        // auto x = size(a_root);
+        // set_rep[a_root] = b_root;
+        // set_rep[b_root] -= x;
+        for (size_t index = 0; index < set_rep.size(); index++) {
+            if (static_cast<int>(index) == a_root || set_rep.at(index) == a_root) {
+                set_rep.at(index) = b_root;
+                set_rep.at(b_root) -= 1;
+            }
+        }
     } else {
-        auto x = size(b_root);
-        set_rep[b_root] = a_root;
-        set_rep[a_root] -= x;
-        // for (size_t index = 0; index < set_rep.size(); index++) {
-        //     if (static_cast<int>(index) == b_root || set_rep.at(index) == b_root) {
-        //         set_rep.at(index) = a_root;
-        //         set_rep.at(a_root) -= 1;
+        // auto x = size(b_root);
+        // set_rep[b_root] = a_root;
+        // set_rep[a_root] -= x;
+        for (size_t index = 0; index < set_rep.size(); index++) {
+            if (static_cast<int>(index) == b_root || set_rep.at(index) == b_root) {
+                set_rep.at(index) = a_root;
+                set_rep.at(a_root) -= 1;
 
-        //     }
-        // }
+            }
+        }
     }
 }
 

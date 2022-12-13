@@ -22,16 +22,28 @@ TEST_CASE("Small BFS Traversal", "[traversal][edge-label-check]") {
     map<Edge, string> edge_labels = traversal.getEdgeLabels();
     
     // Assertions
-    REQUIRE(edge_labels[Edge("Goroka Airport", "Madang Airport")] == "DISCOVERY");
-    REQUIRE(edge_labels[Edge("Goroka Airport", "Mount Hagen Kagamuga Airport")] == "DISCOVERY");
-    REQUIRE(edge_labels[Edge("Goroka Airport", "Nadzab Airport")] == "DISCOVERY");
-    REQUIRE(edge_labels[Edge("Goroka Airport", "Port Moresby Jacksons International Airport")] == "DISCOVERY");
-    REQUIRE(edge_labels[Edge("Madang Airport", "Wewak International Airport")] == "DISCOVERY");
+    for (Edge edge: test_graph.getEdges()) {
+        if (edge.src == "Goroka Airport" && edge.dest == "Madang Airport") REQUIRE(edge_labels[edge] == "DISCOVERY");
+        if (edge.src == "Goroka Airport" && edge.dest == "Mount Hagen Kagamuga Airport") REQUIRE(edge_labels[edge] == "DISCOVERY");
+        if (edge.src == "Goroka Airport" && edge.dest == "Nadzab Airport") REQUIRE(edge_labels[edge] == "DISCOVERY");
+        if (edge.src == "Goroka Airport" && edge.dest == "Port Moresby Jacksons International Airport") REQUIRE(edge_labels[edge] == "DISCOVERY");
+        if (edge.src == "Madang Airport" && edge.dest == "Wewak International Airport") REQUIRE(edge_labels[edge] == "DISCOVERY");
+
+        if (edge.src == "Mount Hagen Kagamuga Airport" && edge.dest == "Nadzab Airport") REQUIRE(edge_labels[edge] == "CROSS");
+        if (edge.src == "Nadzab Airport" && edge.dest == "Madang Airport") REQUIRE(edge_labels[edge] == "CROSS");
+        if (edge.src == "Port Moresby Jacksons International Airport" && edge.dest == "Mount Hagen Kagamuga Airport") REQUIRE(edge_labels[Edge(edge)] == "CROSS");
+        if (edge.src == "Port Moresby Jacksons International Airport" && edge.dest == "Nadzab Airport") REQUIRE(edge_labels[Edge(edge)] == "CROSS");
+    }
+    // REQUIRE(edge_labels[Edge("Goroka Airport", "Madang Airport")] == "DISCOVERY");
+    // REQUIRE(edge_labels[Edge("Goroka Airport", "Mount Hagen Kagamuga Airport")] == "DISCOVERY");
+    // REQUIRE(edge_labels[Edge("Goroka Airport", "Nadzab Airport")] == "DISCOVERY");
+    // REQUIRE(edge_labels[Edge("Goroka Airport", "Port Moresby Jacksons International Airport")] == "DISCOVERY");
+    // REQUIRE(edge_labels[Edge("Madang Airport", "Wewak International Airport")] == "DISCOVERY");
     
-    REQUIRE(edge_labels[Edge("Mount Hagen Kagamuga Airport", "Nadzab Airport")] == "CROSS");
-    REQUIRE(edge_labels[Edge("Nadzab Airport", "Madang Airport")] == "CROSS");
-    REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Mount Hagen Kagamuga Airportt")] == "CROSS");
-    REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Nadzab Airport")] == "CROSS");
+    // REQUIRE(edge_labels[Edge("Mount Hagen Kagamuga Airport", "Nadzab Airport")] == "CROSS");
+    // REQUIRE(edge_labels[Edge("Nadzab Airport", "Madang Airport")] == "CROSS");
+    // REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Mount Hagen Kagamuga Airport")] == "CROSS");
+    // REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Nadzab Airport")] == "CROSS");
 
 }
 
@@ -39,7 +51,7 @@ TEST_CASE("BFS on a Tree", "[graph][bfs][no-cross-edges]") {
     // Initial set-up
     Airport_data test_airport("../data/airports.dat");
     Route_data test_routes("../data/routes_subset_as_tree.dat");
-    Graph test_graph(test_airport1_2, test_routes1_2);
+    Graph test_graph(test_airport, test_routes);
 
     // Traversal set-up
     Traversal traversal;
@@ -48,8 +60,12 @@ TEST_CASE("BFS on a Tree", "[graph][bfs][no-cross-edges]") {
     map<Edge, string> edge_labels = traversal.getEdgeLabels();
 
     // Assertions
+    int counter = 1;
+
     for (Edge edge: test_graph.getEdges()) {
+        if (edge_labels[edge] == "CROSS") std::cout << "BFS " << std::to_string(counter) << ". " << edge.edge_as_string() << " | BFS Label: " << edge_labels[edge] << std::endl;
         REQUIRE(edge_labels[edge] != "CROSS");
+        counter++;
     }
 }
 

@@ -13,8 +13,8 @@ Route_data test_routes1("../data/routes_subset.dat");
 Graph test_graph(test_airport1, test_routes1);
 
 TEST_CASE("Graph Creation Small", "[graph]") {
-    REQUIRE(test_graph.getVertices().size() == 5);
-    REQUIRE(test_graph.getEdges().size() == 4);
+    REQUIRE(test_graph.getVertices().size() == 6);
+    REQUIRE(test_graph.getEdges().size() == 9);
     REQUIRE(test_graph.isDirected());
 }
 

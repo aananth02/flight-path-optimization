@@ -29,7 +29,7 @@ class Edge
     Edge() : src(""), dest(""), edge_label(""), weight(0) {;}
 
     std::string edge_as_string() {
-        std::string output = "Source: " + src + " | Dest: " + dest + " | Weight: " + std::to_string(weight);
+        std::string output = "Source: " + src + " | Dest: " + dest + " | Weight: " + std::to_string(weight) + " | Edge Label: " + edge_label;
         return output;
     }
 
