@@ -23,12 +23,33 @@ int main()
     vector<Vertex> vertices = test_graph.getVertices();
     vector<Edge> edges = test_graph.getEdges();
 
+    //---------------------Graph Implementation Potential Demo-----------------------
+    // Prints Adjacency Matrix
+    // std::vector<Vertex> x = test_graph.getVer();
+    // Printing Adjacenecy Matrix
+    // for (size_t i = 0; i < x.size(); i++) {
+    //     cout << x[i] << " | ";
+    // }
+    // std::cout << "\n\nAdjacency Matrix" << std::endl;
+    // for (size_t i = 0; i < adjacency_matrix.size(); i++)
+    // {
+    //     for (size_t j = 0; j < adjacency_matrix[i].size(); j++)
+    //     {
+    //         pair<float, string> point = adjacency_matrix[i][j];
+    //         std::cout << std::to_string(point.first) << ", " << point.second << " | ";
+    //     }
+    //     std::cout << "\n";
+    // }
+
+
     // Traversal testing
     Traversal traversal;
-    std::cout << "BFS Ordering: " << std::endl;
+    std::cout << "BFS Testing: Printing Nodes in BFS Ordering" << std::endl;
     traversal.printgraph(test_graph);
+    std::cout << "\n" << std::endl;
 
     // Algorithms testing
+    
     Algorithms test_algorithms;
     vector<Edge> edges_copy_to_sort = test_graph.getEdges();
     vector<vector<pair<float, string>>> adjacency_matrix = test_graph.getAdjacencyMatrix();
@@ -62,37 +83,19 @@ int main()
     // // Kruskal Testing
 
     // Print Edges in sorted order
-    std::cout << "\n\nEdges In Sorted Order" << std::endl;
+
+    Graph MST = test_algorithms.Kruskal(test_graph);
+    vector<Edge> mst_edges = MST.getEdges();
+
     int counter = 1;
-    for (Edge edge : edges_copy_to_sort)
+    for (Edge edge : mst_edges)
     {
         std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
         counter++;
     }
 
-    test_algorithms.Kruskal(test_graph);
-    int counter_two = 1;
-    // for (Edge edge : edges_copy_to_sort)
-    // {
-    //     std::cout << std::to_string(counter_two) << ". " << edge.edge_as_string() << std::endl;
-    //     counter++;
-    // }
-    // std::vector<Vertex> x = test_graph.getVer();
-    // Printing Adjacenecy Matrix
-    // for (size_t i = 0; i < x.size(); i++) {
-    //     cout << x[i] << " | ";
-    // }
-    // std::cout << "\n\nAdjacency Matrix" << std::endl;
-    // for (size_t i = 0; i < adjacency_matrix.size(); i++)
-    // {
-    //     for (size_t j = 0; j < adjacency_matrix[i].size(); j++)
-    //     {
-    //         pair<float, string> point = adjacency_matrix[i][j];
-    //         std::cout << std::to_string(point.first) << ", " << point.second << " | ";
-    //     }
-    //     std::cout << "\n";
-    // }
-
+    
+    
     // Airport_data test_airport1_3("../data/airports.dat");
     // Route_data test_routes1_3("../data/routes_subset.dat");
     // Graph test_graph_2(test_airport1_3, test_routes1_3);

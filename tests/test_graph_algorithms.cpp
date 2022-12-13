@@ -59,7 +59,7 @@ TEST_CASE("Single Path Test", "[graph]")
     REQUIRE(path[1] == "Madang Airport");
 }
 
-// KRUSKALL TESTING
+// Kruskal's TESTING
 
 TEST_CASE("Kruskal's", "[kruskal][graph]")
 {
