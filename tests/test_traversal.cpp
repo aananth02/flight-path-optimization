@@ -9,7 +9,7 @@ Airport_data test_airport1_2("../data/airports.dat");
 Route_data test_routes1_2("../data/routes_subset.dat");
 Graph test_graph_1(test_airport1_2, test_routes1_2);
 
-TEST_CASE("Small BFS Traversal", "[traversal][edge-label-check]") {
+TEST_CASE("BFS Traversal Edge Label Check", "[traversal][edge-label-check]") {
     // Initial set-up
     Airport_data test_airport("../data/airports.dat");
     Route_data test_routes("../data/routes_subset.dat");
@@ -34,16 +34,6 @@ TEST_CASE("Small BFS Traversal", "[traversal][edge-label-check]") {
         if (edge.src == "Port Moresby Jacksons International Airport" && edge.dest == "Mount Hagen Kagamuga Airport") REQUIRE(edge_labels[Edge(edge)] == "CROSS");
         if (edge.src == "Port Moresby Jacksons International Airport" && edge.dest == "Nadzab Airport") REQUIRE(edge_labels[Edge(edge)] == "CROSS");
     }
-    // REQUIRE(edge_labels[Edge("Goroka Airport", "Madang Airport")] == "DISCOVERY");
-    // REQUIRE(edge_labels[Edge("Goroka Airport", "Mount Hagen Kagamuga Airport")] == "DISCOVERY");
-    // REQUIRE(edge_labels[Edge("Goroka Airport", "Nadzab Airport")] == "DISCOVERY");
-    // REQUIRE(edge_labels[Edge("Goroka Airport", "Port Moresby Jacksons International Airport")] == "DISCOVERY");
-    // REQUIRE(edge_labels[Edge("Madang Airport", "Wewak International Airport")] == "DISCOVERY");
-    
-    // REQUIRE(edge_labels[Edge("Mount Hagen Kagamuga Airport", "Nadzab Airport")] == "CROSS");
-    // REQUIRE(edge_labels[Edge("Nadzab Airport", "Madang Airport")] == "CROSS");
-    // REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Mount Hagen Kagamuga Airport")] == "CROSS");
-    // REQUIRE(edge_labels[Edge("Port Moresby Jacksons International Airport", "Nadzab Airport")] == "CROSS");
 
 }
 

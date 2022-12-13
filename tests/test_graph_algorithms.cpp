@@ -16,7 +16,7 @@ Algorithms test_algorithms;
 
 // test_algorithms
 
-// FLOYD TESTING
+// Testing Floyd-Warshall's Algorithm
 TEST_CASE("Path Doesn't Exist Small", "[graph]")
 {
     test_algorithms.Floyd_Warshall(test_graph_2);
@@ -66,12 +66,12 @@ TEST_CASE("Kruskal's", "[kruskal][graph]")
     Graph MST = test_algorithms.Kruskal(test_graph_2);
     vector<Edge> mst_edges = MST.getEdges();
 
-    int counter = 1;
-    for (Edge edge : mst_edges)
-    {
-        std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
-        counter++;
-    }
+    // int counter = 1;
+    // for (Edge edge : mst_edges)
+    // {
+    //     std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
+    //     counter++;
+    // }
 
     REQUIRE(MST.edgeExists("Goroka Airport", "Madang Airport"));
     REQUIRE(MST.edgeExists("Goroka Airport", "Mount Hagen Kagamuga Airport"));
