@@ -18,21 +18,21 @@ View the demo as shown below to view our solution to the above question.
 
 # Setting Up Project
 
-## Cloning the repository
+### Cloning the repository
 ```
 $ git clone https://github.com/aananth02/flight-path-optimization.git
 ```
 
 **Note: This is done inside the cs225 repo i.e. inside the docker**
 
-## Getting Compilation Setup using cmake
+### Getting Compilation Setup using cmake
 ```
 $ mkdir build
 $ cd build
 $ cmake ..
 ```
 
-## Getting Python setup for ipynb file
+### Getting Python setup for ipynb file
 
 *VS code packages for .ipynb files and python files must be installed inside environment*
 
@@ -41,7 +41,7 @@ $ cmake ..
 $ python3 --version
 ```
 
-## Installing pip inside the linux environment
+### Installing pip inside the linux environment
 
 • This is needed to run the python commands in ipynb file
 
@@ -52,7 +52,14 @@ $ apt update
 $ apt install python3-pip
 ```
 
-## Installing Pandas with pip
+<strong> or, if above command fails - </strong>
+
+```
+$ sudo apt update
+$ sudo apt install python3-pip
+```
+
+### Installing Pandas with pip
 
 ```
 $ pip install pandas
@@ -63,18 +70,20 @@ $ pip install pandas
 
 # Running Project
 
+<strong>More information on the test cases and data is included below: </strong>
+
 **Note: You need to be inside the build directory, else run:**
 ```
 cd build
 ```
 
-## Running Demo
+### Running Demo
 ```
 $ make main
 $ ./main
 ```
 
-## Running Tests
+### Running Tests
 ```
 $ make test
 $ ./main
@@ -83,8 +92,36 @@ $ ./main
 <br>
 <br>
 
+# Notes:
 
-## <strong>Notes and Disclaimers</strong>:
+### File and Project Structure
+
+**We have used a very conventional file structure**
+
+* /src contains all the main source code and each file is the namesake of the code it contains
+* /test contains all the test cases
+* /data contains the dataset, cleaned dataset and smaller subset which we used for testing purposes
+* /entry contains the main file, with the code for the demo
+* /lib was created and has been configured with CMake, it is however not used and is inplace if required later for further development
+* Several .md files contain information such as report, contract, and Project proposal
+* Also have included file with link for video presentation above...
+
+### Development and Testing information
+
+**Note: Information on each function can be viewed in .h and .cpp file above in /src, we have included several comments to make the code more readable**
+
+*View running command from the above...*
+
+* Test cases while developing project: Tested Graphs implementation, Tested Data Extraction
+* Test cases on completion: Tested ALL algorithms (along with usefull output to visualize mistakes if any)
+* Note: Some of the testing has been done on a smaller dataset for visualization and runtime purposes
+* *Ref. above included written report for more information on test-cases*
+
+
+<br>
+<br>
+
+# Disclaimer:
 
 ### <strong>DataSet Cleaning</strong>:
 
