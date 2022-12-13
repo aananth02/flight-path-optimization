@@ -15,6 +15,8 @@ Graph test_graph_2(test_airport1_3, test_routes1_3);
 Algorithms test_algorithms;
 
 // test_algorithms
+
+// FLOYD TESTING
 TEST_CASE("Path Doesn't Exist Small", "[graph]")
 {
     test_algorithms.Floyd_Warshall(test_graph_2);
@@ -28,66 +30,39 @@ TEST_CASE("Path Connected To Itself", "[graph]")
     REQUIRE(path.size() == 0);
 }
 
-// TEST_CASE("Path Single Edge", "[graph]")
-// {
-//     test_algorithms.Floyd_Warshall(test_graph_2);
-//     vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Mount Hagen Kagamuga Airport");
-//     REQUIRE(path.size() == 2);
-//     REQUIRE(path[1] == "Goroka Airport");
-//     REQUIRE(path[0] == "Mount Hagen Kagamuga Airport");
-// }
-
-// TEST_CASE("Path Multiple Edges", "[graph]")
-// {
-//     test_algorithms.Floyd_Warshall(test_graph_2);
-//     vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
-//     REQUIRE(path.size() == 3);
-//     REQUIRE(path[0] == "Port Moresby Jacksons International Airport");
-//     REQUIRE(path[1] == "Nadzab Airport");
-//     REQUIRE(path[2] == "Madang Airport");
-// }
-
-// FLOYD TESTING
-
-TEST_CASE("Floyd Test", "[graph]")
+TEST_CASE("Path Multiple Edges", "[graph]")
 {
-    vector<vector<Vertex>> to_compare;
-    vector<Vertex> to_add = test_algorithms.Path(test_graph_2, "Goroka Airport", "Port Moresby Jacksons International Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Goroka Airport", "Mount Hagen Kagamuga Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Goroka Airport", "Nadzab Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Goroka Airport", "Madang Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Goroka Airport", "Wewak International Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Mount Hagen Kagamuga Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Nadzab Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Mount Hagen Kagamuga Airport", "Nadzab Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Mount Hagen Kagamuga Airport", "Madang Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Nadzab Airport", "Madang Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Nadzab Airport", "Wewak International Airport");
-    to_compare.push_back(to_add);
-    to_add = test_algorithms.Path(test_graph_2, "Madang Airport", "Wewak International Airport");
-    to_compare.push_back(to_add);
-
-    vector<vector<Vertex>> floyd_output = test_algorithms.getPaths();
-    for (auto to_find : to_compare)
-    {
-        REQUIRE(std::find(floyd_output.begin(), floyd_output.end(), to_find) != floyd_output.end());
-    }
-    // REQUIRE(floyd_output.size() == to_compare.size());
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
+    REQUIRE(path.size() == 3);
+    REQUIRE(path[0] == "Port Moresby Jacksons International Airport");
+    REQUIRE(path[1] == "Nadzab Airport");
+    REQUIRE(path[2] == "Madang Airport");
+}
+TEST_CASE("Path More Edges", "[graph]")
+{
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Wewak International Airport");
+    REQUIRE(path.size() == 4);
+    REQUIRE(path[0] == "Port Moresby Jacksons International Airport");
+    REQUIRE(path[1] == "Nadzab Airport");
+    REQUIRE(path[2] == "Madang Airport");
+    REQUIRE(path[3] == "Wewak International Airport");
 }
 
-TEST_CASE("Kruskal's", "[kruskal][graph]") {
+TEST_CASE("Single Path Test", "[graph]")
+{
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Madang Airport");
+    REQUIRE(path.size() == 2);
+    REQUIRE(path[0] == "Goroka Airport");
+    REQUIRE(path[1] == "Madang Airport");
+}
+
+// KRUSKALL TESTING
+
+TEST_CASE("Kruskal's", "[kruskal][graph]")
+{
     Graph MST = test_algorithms.Kruskal(test_graph_2);
     vector<Edge> mst_edges = MST.getEdges();
 
@@ -97,7 +72,7 @@ TEST_CASE("Kruskal's", "[kruskal][graph]") {
         std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
         counter++;
     }
-   
+
     REQUIRE(MST.edgeExists("Goroka Airport", "Madang Airport"));
     REQUIRE(MST.edgeExists("Goroka Airport", "Mount Hagen Kagamuga Airport"));
     REQUIRE(MST.edgeExists("Goroka Airport", "Nadzab Airport"));
