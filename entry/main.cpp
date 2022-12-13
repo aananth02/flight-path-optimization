@@ -141,7 +141,7 @@ int main()
     std::cout << "Shortest path from " << source << " to " << dest << " is " << path.size() << " steps-: " << std::endl;
     if (path.empty())
     {
-        std::cout << "Path doesnt exist" << std::endl;
+        std::cout << "Path does not exist" << std::endl;
     }
     else
     {
