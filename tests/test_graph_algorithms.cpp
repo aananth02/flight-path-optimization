@@ -48,6 +48,7 @@ TEST_CASE("Path More Edges", "[graph]")
     REQUIRE(path[1] == "Nadzab Airport");
     REQUIRE(path[2] == "Madang Airport");
     REQUIRE(path[3] == "Wewak International Airport");
+    // REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).central == "Nadzab Airport");
 }
 
 TEST_CASE("Single Path Test", "[graph]")
@@ -80,6 +81,30 @@ TEST_CASE("Kruskal's", "[kruskal][graph]")
     REQUIRE(MST.edgeExists("Port Moresby Jacksons International Airport", "Nadzab Airport"));
 }
 
+// betweeness centrality test
+
+TEST_CASE("Betweeness Test", "[graph]")
+{
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Wewak International Airport");
+    REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).central == "Nadzab Airport");
+}
+
+TEST_CASE("Betweeness Test2", "[graph]")
+{
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Wewak International Airport");
+    REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).central == "Goroka Airport");
+    REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).maxCount == 4);
+}
+
+// TEST_CASE("Betweeness Test 2", "[graph]")
+// {
+//     // test_algorithms.Floyd_Warshall(test_graph_2);
+//     vector<string> path = test_algorithms.Path(test_graph_2, "Port Moresby Jacksons International Airport", "Madang Airport");
+//     REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).maxCount == 4);
+//     REQUIRE(test_algorithms.BetweennessCentrality(test_graph_2, path).central == "Nadzab Airport");
+// }
 // TEST_CASE("Path Multiple Edges", "[graph]") {
 //     vector<string> path = test_algorithms.Path(test_graph_2, "Goroka Airport", "Mount Hagen Kagamuga Airport");
 //     REQUIRE(path.size() == 1);

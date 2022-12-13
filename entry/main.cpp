@@ -41,15 +41,15 @@ int main()
     //     std::cout << "\n";
     // }
 
-
     // Traversal testing
     Traversal traversal;
     std::cout << "BFS Testing: Printing Nodes in BFS Ordering" << std::endl;
     traversal.printgraph(test_graph);
-    std::cout << "\n" << std::endl;
+    std::cout << "\n"
+              << std::endl;
 
     // Algorithms testing
-    
+
     Algorithms test_algorithms;
     vector<Edge> edges_copy_to_sort = test_graph.getEdges();
     vector<vector<pair<float, string>>> adjacency_matrix = test_graph.getAdjacencyMatrix();
@@ -83,7 +83,8 @@ int main()
     // // Kruskal Testing
 
     // Print Edges in sorted order
-
+    std::cout << "-----MST Demo-----" << std::endl;
+    std::cout << std::endl;
     Graph MST = test_algorithms.Kruskal(test_graph);
     vector<Edge> mst_edges = MST.getEdges();
 
@@ -93,9 +94,8 @@ int main()
         std::cout << std::to_string(counter) << ". " << edge.edge_as_string() << std::endl;
         counter++;
     }
+    std::cout << std::endl;
 
-    
-    
     // Airport_data test_airport1_3("../data/airports.dat");
     // Route_data test_routes1_3("../data/routes_subset.dat");
     // Graph test_graph_2(test_airport1_3, test_routes1_3);
@@ -115,54 +115,52 @@ int main()
     // REQUIRE(path[2] == "Madang Airport");
     // std::cout << test_algorithms.BetweennessCentrality(test_graph_2, path2) << std::endl;
 
-    
-    
     // -----------------------------------------------Demo Code Begins Here----------------------------------------
 
-    // // shortest path
-    // std::cout << "-----Shortest Path Demo-----" << std::endl;
-    // std::cout << std::endl;
-    // Airport_data test_airport1_3("../data/airports.dat");
-    // Route_data test_routes1_3("../data/routes_subset.dat");
-    // Graph test_graph_2(test_airport1_3, test_routes1_3);
+    // shortest path
+    std::cout << "-----Shortest Path Demo-----" << std::endl;
+    std::cout << std::endl;
+    Airport_data test_airport1_3("../data/airports.dat");
+    Route_data test_routes1_3("../data/routes_subset.dat");
+    Graph test_graph_2(test_airport1_3, test_routes1_3);
     // Algorithms test_algorithms;
-    // test_algorithms.Floyd_Warshall(test_graph_2);
-    // char source[60];
-    // char dest[60];
-    // cout << "Enter source airport name: ";
+    test_algorithms.Floyd_Warshall(test_graph_2);
+    char source[60];
+    char dest[60];
+    cout << "Enter source airport name: ";
 
-    // // Examples airport names (feel free to add more if you want to)
-    // // Port Moresby Jacksons International Airport
-    // // Wewak International Airport
-    // // Goroka Airport
+    // Examples airport names (feel free to add more if you want to)
+    // Port Moresby Jacksons International Airport
+    // Wewak International Airport
+    // Goroka Airport
 
-    // cin.getline(source, 60);
-    // cout << "Enter destination airport name: ";
-    // cin.getline(dest, 60);
-    // vector<string> path = test_algorithms.Path(test_graph_2, source, dest);
-    // std::cout << "Shortest path from " << source << " to " << dest << " is " << path.size() << " steps-: " << std::endl;
-    // if (path.empty())
-    // {
-    //     std::cout << "Path doesnt exist" << std::endl;
-    // }
-    // else
-    // {
-    //     for (auto airport : path)
-    //     {
-    //         std::cout << airport << " -> ";
-    //     }
-    //     std::cout << "reached" << std::endl;
-    // }
-    // std::cout << std::endl;
+    cin.getline(source, 60);
+    cout << "Enter destination airport name: ";
+    cin.getline(dest, 60);
+    vector<string> path = test_algorithms.Path(test_graph_2, source, dest);
+    std::cout << "Shortest path from " << source << " to " << dest << " is " << path.size() << " steps-: " << std::endl;
+    if (path.empty())
+    {
+        std::cout << "Path doesnt exist" << std::endl;
+    }
+    else
+    {
+        for (auto airport : path)
+        {
+            std::cout << airport << " -> ";
+        }
+        std::cout << "reached" << std::endl;
+    }
+    std::cout << std::endl;
 
-    // // betweeness centrality
-    // std::cout << std::endl;
-    // std::cout << "-----Betweeness Centrality Demo-----" << std::endl;
-    // std::cout << std::endl;
-    // std::cout << "The most prominent transit hub is " << test_algorithms.BetweennessCentrality(test_graph_2, path).central << " as it is connected to " << test_algorithms.BetweennessCentrality(test_graph_2, path).maxCount << " ports" << std::endl;
+    // betweeness centrality
+    std::cout << std::endl;
+    std::cout << "-----Betweeness Centrality Demo-----" << std::endl;
+    std::cout << std::endl;
+    std::cout << "The most prominent transit hub is " << test_algorithms.BetweennessCentrality(test_graph_2, path).central << " as it is connected to " << test_algorithms.BetweennessCentrality(test_graph_2, path).maxCount << " ports" << std::endl;
 
-    // // minimum spanning tree
-    // std::cout << std::endl;
+    // minimum spanning tree
+    std::cout << std::endl;
 
     return 0;
 }
